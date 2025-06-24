@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {//TypeScript derleyicisinin nasıl çalışacağını belirleyen ayarlar.
+    "target": "es2021",//TypeScript'in hangi ECMAScript sürümüne derleneceğini belirler.                                  
+    "module": "commonjs", //Modüllerin Node.js'de çalışabilen CommonJS formatında derlenmesini sağlar. import olayı
+    "sourceMap": true,  //.map dosyaları oluşturarak, derlenmiş JavaScript kodunu orijinal TypeScript koduna eşler.
+    "outDir": "./dist",//Derlenmiş .js dosyalarının kaydedileceği dizini belirtir.                            
+    "esModuleInterop": true,//CommonJS ve ES modülleri arasında uyumluluk sağlar.                            
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,//Belirtilmeyen tipler any kabul edilmez.  strictNullChecks: null/undefined kontrolü zorunlu kılar.                             
+    "skipLibCheck": true,
+    "experimentalDecorators": true,//Decorator (@Component, @Get gibi) kullanımına izin verir.
+    "emitDecoratorMetadata": true //Decorator'lar için runtime'da tip bilgisi üretir.Bağımlılık: reflect-metadata paketi gerektirir.                              
+  },
+  "include": [//Derlenecek dosyaları belirtir.
+      "app.ts"
+  ],
+  "exclude": [//Derleme dışı bırakılacak dosyaları belirtir.
+    "node_modules"
+  ],
+}

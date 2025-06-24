@@ -1,0 +1,1 @@
+// İsteklerin işlenmesi sırasında araya giren ara yazılımları (middleware) içerir; örneğin, kimlik doğrulama kontrolü burada yapılabilir.

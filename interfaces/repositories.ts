@@ -1,0 +1,1 @@
+//TypeScript arayüzlerini içerir; bu arayüzler, veri yapılarının tip güvenliğini sağlar.
