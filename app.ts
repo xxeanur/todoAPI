@@ -4,6 +4,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import {connectDB} from './config/db';
 import router from './routes/index';
+import {ErrorHandler} from './middlewares/errorHandler'
 
 
 dotenv.config();//dootenv yapılandırması olmadan .env ye erişilemez.
@@ -17,7 +18,8 @@ app.use(express.json());//istekleri json formatında okuması için kullanıyoru
 
 app.use("/api",router);// Tek bir yerden routes işlemlerini kontrol edeceğim.
 
-
+//hata yakalama
+app.use(ErrorHandler);
 
 
 app.listen(port,()=>{

@@ -3,7 +3,8 @@ import bcrypt from 'bcryptjs';
 import CreateUserDTO from '../../DTOs/CreateUserDTO';
 import { User } from '../../entities/User';
 import { UserRepository } from '../../repositories/UserRepository'
-
+import ClientSideException from '../../utils/clientSideExceptions';
+//servis : işi yapar
 export class RegisterService {
     private userRepository: UserRepository;
     constructor(){
@@ -14,7 +15,7 @@ export class RegisterService {
     
         //eğer kullanıcı emaili veritabanında varsa tekrar kayıt yapamasın.Dolayısıyla Client'a zaten kayıtlı hesap mesajı döndürelim.
         if (await this.userRepository.findByEmail(dto.email)) {
-            throw new Error("Bu e-posta zaten kayıtlı.");
+            throw new ClientSideException("This email is already taken.",400);
         }
         //şifre Hash
         dto.password = await bcrypt.hash(dto.password, 10);
