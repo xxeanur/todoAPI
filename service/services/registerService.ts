@@ -4,19 +4,25 @@ import CreateUserDTO from '../../DTOs/CreateUserDTO';
 import { User } from '../../entities/User';
 import { UserRepository } from '../../repositories/UserRepository'
 import ClientSideException from '../../utils/clientSideExceptions';
+import { Messages } from '../../constants/message'
+
 //servis : işi yapar
 export class RegisterService {
     private userRepository: UserRepository;
-    constructor(){
+    constructor() {
         this.userRepository = new UserRepository();
     }
 
-    async register(dto:CreateUserDTO) {
-    
+    async register(dto: CreateUserDTO) {
         //eğer kullanıcı emaili veritabanında varsa tekrar kayıt yapamasın.Dolayısıyla Client'a zaten kayıtlı hesap mesajı döndürelim.
         if (await this.userRepository.findByEmail(dto.email)) {
-            throw new ClientSideException("This email is already taken.",400);
+            throw new ClientSideException(Messages.EmailAlreadyTaken, 400);
         }
+        
+        if (dto.password !== dto.confirmPassword) {
+            throw new ClientSideException("Şifreler eşleşmiyor", 400);
+        }
+
         //şifre Hash
         dto.password = await bcrypt.hash(dto.password, 10);
         //DTOdan entitye dönüştür.
@@ -26,7 +32,6 @@ export class RegisterService {
         //Repository ile kullanıcıyı kaydet
         await this.userRepository.create(userEntity);
 
-        return { message: 'Kayıt başarılı.' }
+        return { message: Messages.RegistrationSuccess }
     }
-
 }

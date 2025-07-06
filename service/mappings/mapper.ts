@@ -1,5 +1,5 @@
 //mapper tanımı
-import { createMap, createMapper, forMember, mapFrom, Mapper, MappingProfile } from '@automapper/core';
+import { createMap, createMapper, forMember, mapFrom, } from '@automapper/core';
 import { classes } from '@automapper/classes';//DTO ve entity class şeklinde olmalı
 import CreateUserDTO from '../../DTOs/CreateUserDTO';//istemciden gelen username, email, password vs.
 import { User } from '../../entities/User';// Bu sınıf, MongoDB'de kaydedilecek veri YAPISINI temsil eder.
@@ -24,7 +24,7 @@ createMap(
   forMember(
     (destination) => destination.createdAt, // hedef objedeki alan
     mapFrom(() => new Date()) // bu alanı set ediyoruz burada tarih objesiyle
-  )
+  ),
 );
 
 
